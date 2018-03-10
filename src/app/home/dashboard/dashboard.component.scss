@@ -1,0 +1,11 @@
+@import "~styles.scss";
+
+.divheight {
+  height: $div-height;
+  border: 1px solid gray;
+}
+
+.headerBar {
+  background-color: $primary-color;
+  height: 1.8rem;
+}

@@ -1,0 +1,198 @@
+<div class="container-fluid mt-4 pb-3 text-center" style="background:#fff;">
+
+  <button type="button" class="btn btn-primary col-sm-3 col-md-2 pt-3 pb-3" (click)='team()'>+ Class</button>
+
+    <table *ngIf='flag' id="example2" class="table table-striped " cellspacing="0" width="100%">
+        <thead>
+            <tr>
+                <th></th>
+                <th>Name</th>
+                <th>Subject</th>
+                <th>Members</th>
+                <th>Manager</th>
+                <th>Details</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor='let res of teams; let i = index'>
+                <td>{{i+1}}</td>
+                <td>{{res.name}}</td>
+                <td>
+                    <button type="button" class="btn btn-primary tt1" (click)='showFormModal(res.name, res.cid, res.form)' >
+                      {{calForms(res.form)}} Paper/s
+                      <!-- <span class="tt2" > &nbsp; {{projectForm(res.form)}}  &nbsp; </span> -->
+                    </button>
+                </td>
+                <td>
+                    <button type="button" class="btn btn-primary tt1" (click)='showAssesorModal(res.name, res.cid, res.assesor)' >
+                      {{calForms(res.assesor)}} Student/s
+                    </button>
+                </td>
+                <td>
+                  <button type="button" class="btn btn-primary tt1" (click)='showManagerModal(res.name, res.cid, res.tl)' >
+                    {{calForms(res.tl)}} Manager/s
+                  </button>
+                </td>
+                <td>
+                  <button type="button" class="btn btn-primary " (click)="teamDetails(i, res.cid)" >  {{res.details}}  </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+</div>
+
+<!-- Add Team model -->
+<div class="modal fade" id="newTeamModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Add new class</h5>
+      </div>
+      <div class="modal-body text-center" style="height:300px; overflow-y: auto">
+          <div class="row justify-content-center" >
+            <input type="text" name="" value="" [(ngModel)]='teamName' placeholder="Class Name" class="col-8 form-control mb-5" />
+
+            <br>
+            <select [(ngModel)]="tl" class="col-8 form-control mb-5" >
+              <option *ngFor='let opt of asrArray; let i=i' [ngValue]=opt.cid>{{opt.name}}</option>
+            </select>
+
+            <br>
+            <select [(ngModel)]="formAssociate" class="col-8 form-control mb-5" >
+              <option *ngFor='let opt of formArray; let i=i' [ngValue]=opt.Details  >{{opt.Details.name + " " + opt.Details.project}}</option>
+            </select>
+          </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary col-sm-3 pt-3 pb-3" data-toggle="modal" data-target="#addRules" (click)='saveTeam()'>Add Class</button>
+        <button type="button" class="btn btn-secondary col-sm-3 pt-3 pb-3" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Add Team model -->
+
+<!-- assesor form model -->
+<div class="modal fade" id="showFormModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Associated form for {{teamName}}</h5>
+      </div>
+      <div class="modal-body text-center" style="height:300px; overflow-y: auto">
+          <div class="row justify-content-center" >
+
+            {{teamName}} is  assigned with  paper/s :  <br>
+
+            <div  class="col-12" *ngFor="let pro of teamFormArray; let i = index">{{i+1}}. {{pro.name+" "+pro.project}} <i class="fa fa-trash-o" aria-hidden="true" (click)='deleteFormTeamArray(pro.cid)' ></i> <br> </div>
+            <br>
+            <br>
+            <br>
+            <div class="col-12" >Assign new subject : </div>
+            <select [(ngModel)]="newForm" class="col-8 form-control mb-5" >
+              <option *ngFor='let opt of formArray; let i=i' [ngValue]=opt  >{{opt.Details.name + " " + opt.Details.project}}</option>
+            </select>
+            <div  class="col-12"></div>
+            <button type="button" class="btn btn-primary" data-toggle="modal"  (click)='assignNewFrom()'>Assign</button>
+
+          </div>
+      </div>
+      <div class="modal-footer">
+
+        <button type="button" class="btn btn-secondary col-sm-3 pt-3 pb-3" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- assesor form model -->
+
+<!-- Add Assesor model -->
+<div class="modal fade" id="showAssesorModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Add new Student</h5>
+      </div>
+      <div class="modal-body text-center" style="height:300px; overflow-y: auto">
+          <div class="row justify-content-center" >
+
+            {{teamName}} Student/s :  <br>
+
+            <div  class="col-12" *ngFor="let name of extAsrNameArray; let i=index">{{i+1}} . {{name.name}} <i class="fa fa-trash-o" aria-hidden="true" (click)='deleteAsrTeamArray(name.cid)' ></i> <br> </div>
+            <br>
+            <br>
+
+            <br>
+            <select [(ngModel)]="tl" class="col-8 form-control mb-5" >
+              <option *ngFor='let opt of asrArray; let i=i' [ngValue]=opt.cid>{{opt.name}}</option>
+            </select>
+          </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary col-sm-3 pt-3 pb-3" data-toggle="modal" data-target="#addRules" (click)='addNewAssesor()'>Add Student</button>
+        <button type="button" class="btn btn-secondary col-sm-3 pt-3 pb-3" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Add Assesor model -->
+
+<!-- Add Manager model -->
+<div class="modal fade" id="showManagerModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Add new Manager</h5>
+      </div>
+      <div class="modal-body text-center" style="height:300px; overflow-y: auto">
+          <div class="row justify-content-center" >
+            <!-- <input type="text" name="" value="" [(ngModel)]='teamName' placeholder="Team Name" class="col-8 form-control mb-5" disabled/>
+
+            <div  style="height:130px; width:80% ; border: 2px solid gray; border-radius:3px; overflow:auto; margin-bottom:20px">
+                  <b *ngFor="let name of extMgrNameArray; let i=index" style="float : left"> {{i+1}} . {{name}} </b> <br>
+            </div> -->
+
+            {{teamName}} Manager/s :  <br>
+
+            <div  class="col-12" *ngFor="let name of extMgrNameArray; let i=index">{{i+1}} . {{name.name}} <i class="fa fa-trash-o" aria-hidden="true" (click)='deleteMgrTeamArray(name.cid)' ></i> <br> </div>
+            <br>
+            <br>
+
+            <br>
+            <select [(ngModel)]="tl" class="col-8 form-control mb-5" >
+              <option *ngFor='let opt of asrArray; let i=i' [ngValue]=opt.cid>{{opt.name}}</option>
+            </select>
+          </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary col-sm-3 pt-3 pb-3" data-toggle="modal" data-target="#addRules" (click)='addNewManager()'>Add Manager</button>
+        <button type="button" class="btn btn-secondary col-sm-3 pt-3 pb-3" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Add Manager model -->
+
+<!-- Team details -->
+<div class="modal fade" id="teamDetails" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel"></h5>
+      </div>
+      <div class="modal-body text-center" style="height:300px; overflow-y: auto">
+          <div class="row justify-content-center" >
+
+            <br>
+
+          </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary col-sm-3 pt-3 pb-3" data-dismiss="modal">Close</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+<!-- Team details -->

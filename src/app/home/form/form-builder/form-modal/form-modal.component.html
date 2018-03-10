@@ -1,0 +1,804 @@
+<br>
+<!-- <div class="modal-header">
+  <h5 class="modal-title" id="exampleModalLabel">Form elements</h5>
+
+</div> -->
+<div class="modal-body" >
+  <div class="form-group">
+    <ul class="nav nav-tabs" role="tablist">
+      <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#m1" role="tab" (click)='inputType("text")'>Inputs</a></li>
+      <li class="nav-item">
+        <a class="nav-link" data-toggle="tab" href="#m2" role="tab" (click)='inputType("file")'>File & Media</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" data-toggle="tab" href="#m3" role="tab" (click)='inputType("break")'>Interface</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" data-toggle="tab" href="#m4" role="tab" (click)='inputType("template")'>Template</a>
+      </li>
+    </ul>
+    <div class="tab-content mt-5">
+      <!-- Input tab -->
+      <div class="tab-pane active" id="m1" role="tabpanel" >
+        <div class="">
+          <div class="row justify-content-center m-0">
+            <div class="col-2 modal-height slider-bg" style="background:#fff;height:290px;">
+              <!-- Nav tabs -->
+              <ul class="nav flex-column text-left " role="tablist">
+                <li class="nav-item">
+                  <a class="nav-link active" data-toggle="tab" href="#s1" role="tab" (click)='inputType("text")'>Text</a>
+                </li>
+                <!-- <li class="nav-item">
+                  <a class="nav-link " data-toggle="tab" href="#s2" role="tab" (click)='inputType("password")'>Password</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link " data-toggle="tab" href="#s3" role="tab" (click)='inputType("email")'>Email</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link " data-toggle="tab" href="#s4" role="tab" (click)='inputType("number")'>Number</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link " data-toggle="tab" href="#s5" role="tab" (click)='inputType("phone")'>Pnone</a>
+                </li>-->
+                <li class="nav-item">
+                  <a class="nav-link " data-toggle="tab" href="#s6" role="tab" (click)='inputType("textarea")'>Textarea</a>
+                </li>
+                <!-- <li class="nav-item">
+                  <a class="nav-link " data-toggle="tab" href="#s7" role="tab" (click)='inputType("date")'>Date</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link " data-toggle="tab" href="#s8" role="tab"  (click)='inputType("time")'>Time</a>
+                </li>-->
+                <li class="nav-item">
+                  <a class="nav-link " data-toggle="tab" href="#s9" role="tab" (click)='inputType("radio")'> Radio</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link " data-toggle="tab" href="#s10" role="tab" (click)='inputType("checkbox")'>Checkbox</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link " data-toggle="tab" href="#s11" role="tab" (click)='inputType("dropdown")'>Dropdown</a>
+                </li>
+                <!-- <li class="nav-item">
+                  <a class="nav-link " data-toggle="tab" href="#s12" role="tab" (click)='inputType("slider")'>Slider</a>
+                </li> -->
+              </ul>
+            </div>
+
+            <div class="col-10 modal-height">
+              <!-- Tab panes -->
+              <div class="tab-content">
+
+                <!-- Text Input s1-->
+                <div class="tab-pane active" id="s1" role="tabpanel">
+                  <h4>Text Element</h4>
+                  <br>
+                  <div class="form-group row">
+                    <label for="staticEmail" class="col-sm-2 col-form-label">Name</label>
+                    <div class="col-10">
+                      <!-- <textarea class="form-control form-control-sm" [(ngModel)]='name' rows="3" > </textarea> -->
+                      <textarea class="form-control form-control-sm" [(ngModel)]='name' rows="3" > </textarea>
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="staticEmail" class="col-sm-4 col-form-label">Helping Text</label>
+                    <div class="col-8">
+                      <input class="form-control form-control-sm" type="text" [(ngModel)]='helptext' placeholder="">
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="staticEmail" class="col-sm-2 col-form-label">Alias</label>
+                    <div class="col-10">
+                      <input class="form-control form-control-sm" type="text" placeholder="" [(ngModel)]='alias' >
+                    </div>
+                  </div>
+                  <div class="form-check">
+                    <label class="form-check-label">
+                      <input type="checkbox" class="form-check-input" [checked]="required" (change)='checked()'>
+                        &nbsp; Required
+                    </label>
+                  </div>
+
+                </div>
+
+                <!-- Text Input s2-->
+                <div class="tab-pane" id="s2" role="tabpanel">
+
+                  <h4>Password input element</h4>
+                  <br>
+                  <div class="form-group row">
+                    <label for="staticEmail" class="col-sm-2 col-form-label">Name</label>
+                    <div class="col-10">
+                      <!-- <input class="form-control form-control-sm" type="text" [(ngModel)]='name' placeholder=""> -->
+                      <textarea class="form-control form-control-sm" [(ngModel)]='name' rows="3" > </textarea>
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="staticEmail" class="col-sm-4 col-form-label">Helping Text</label>
+                    <div class="col-8">
+                      <input class="form-control form-control-sm" type="text" [(ngModel)]='helptext' placeholder="">
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="staticEmail" class="col-sm-2 col-form-label">Alias</label>
+                    <div class="col-10">
+                      <input class="form-control form-control-sm" type="text" placeholder="" [(ngModel)]='alias' >
+                    </div>
+                  </div>
+                  <div class="form-check">
+                    <label class="form-check-label">
+                      <input type="checkbox" class="form-check-input" [checked]="required"   (change)='checked()'>
+                        &nbsp; Required
+                    </label>
+                  </div>
+
+                </div>
+
+                <!-- Email Input s3 -->
+                <div class="tab-pane" id="s3" role="tabpanel">
+
+                  <h4>Email input element</h4>
+                  <br>
+                  <div class="form-group row">
+                    <label for="staticEmail" class="col-sm-2 col-form-label">Name</label>
+                    <div class="col-10">
+                      <input class="form-control form-control-sm" type="text" [(ngModel)]='name' placeholder="">
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="staticEmail" class="col-sm-4 col-form-label">Helping Text</label>
+                    <div class="col-8">
+                      <input class="form-control form-control-sm" type="text" [(ngModel)]='helptext' placeholder="">
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="staticEmail" class="col-sm-2 col-form-label">Alias</label>
+                    <div class="col-10">
+                      <input class="form-control form-control-sm" type="text" placeholder="" [(ngModel)]='alias' >
+                    </div>
+                  </div>
+                  <div class="form-check">
+                    <label class="form-check-label">
+                      <input type="checkbox" class="form-check-input" [checked]="required"   (change)='checked()'>
+                        &nbsp; Required
+                    </label>
+                  </div>
+
+                </div>
+
+                <!-- Number Input s4 -->
+                <div class="tab-pane" id="s4" role="tabpanel">
+                  <h4>Number Input</h4>
+                  <br>
+                  <div class="form-group row">
+                    <label for="staticEmail" class="col-sm-2 col-form-label">Name</label>
+                    <div class="col-10">
+                      <input class="form-control form-control-sm" type="text" [(ngModel)]='name' placeholder="">
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="staticEmail" class="col-sm-4 col-form-label">Helping Text</label>
+                    <div class="col-8">
+                      <input class="form-control form-control-sm" type="text" [(ngModel)]='helptext' placeholder="">
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="staticEmail" class="col-sm-2 col-form-label">Alias</label>
+                    <div class="col-10">
+                      <input class="form-control form-control-sm" type="text" placeholder="" [(ngModel)]='alias' >
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="staticEmail" class="col-sm-4 col-form-label">Range from</label>
+                    <div class="col-3">
+                      <input class="form-control form-control-sm" type="number" placeholder=""  [(ngModel)]='rangeFrom' >
+                    </div>
+                    <label for="staticEmail" class="col-sm-2 col-form-label"> To</label>
+                    <div class="col-3">
+                      <input class="form-control form-control-sm" type="number" placeholder="" [(ngModel)]='rangeTo' >
+                    </div>
+                  </div>
+                  <div class="form-check">
+                    <label class="form-check-label">
+                      <input type="checkbox" class="form-check-input"  [checked]="required"  (change)='checked()'>
+                        &nbsp; Required
+                    </label>
+                  </div>
+
+                </div>
+
+                <!-- phone number s5 -->
+                <div class="tab-pane" id="s5" role="tabpanel">
+                  <h4>Phone no. Input</h4>
+                  <br>
+                  <div class="form-group row">
+                    <label for="staticEmail" class="col-sm-2 col-form-label">Name</label>
+                    <div class="col-10">
+                      <input class="form-control form-control-sm" type="text" [(ngModel)]='name' placeholder="">
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="staticEmail" class="col-sm-4 col-form-label">Helping Text</label>
+                    <div class="col-8">
+                      <input class="form-control form-control-sm" type="text" [(ngModel)]='helptext' placeholder="">
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="staticEmail" class="col-sm-2 col-form-label">Alias</label>
+                    <div class="col-10">
+                      <input class="form-control form-control-sm" type="text" placeholder="" [(ngModel)]='alias' >
+                    </div>
+                  </div>
+                  <div class="form-check">
+                    <label class="form-check-label">
+                      <input type="checkbox" class="form-check-input"  [checked]="required" (change)='checked()'>
+                        &nbsp; Required
+                    </label>
+                  </div>
+
+                </div>
+
+                <!-- Textarea Input s6 -->
+                <div class="tab-pane" id="s6" role="tabpanel">
+                  <h4>Textarea</h4>
+                  <br>
+                  <div class="form-group row">
+                    <label for="staticEmail" class="col-sm-2 col-form-label">Name</label>
+                    <div class="col-10">
+                      <textarea class="form-control form-control-sm" [(ngModel)]='name' rows="3" > </textarea>
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="staticEmail" class="col-sm-4 col-form-label">Helping Text</label>
+                    <div class="col-8">
+                      <input class="form-control form-control-sm" type="text" [(ngModel)]='helptext' placeholder="">
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="staticEmail" class="col-sm-2 col-form-label">Alias</label>
+                    <div class="col-10">
+                      <input class="form-control form-control-sm" type="text" placeholder="" [(ngModel)]='alias' >
+                    </div>
+                  </div>
+                  <div class="form-check">
+                    <label class="form-check-label">
+                      <input type="checkbox" class="form-check-input"  [checked]="required" (change)='checked()'>
+                        &nbsp; Required
+                    </label>
+                  </div>
+
+                </div>
+
+                <!-- Date Input s7 -->
+                <div class="tab-pane" id="s7" role="tabpanel">
+                  <h4>Date Input</h4>
+                  <br>
+                  <div class="form-group row">
+                    <label for="staticEmail" class="col-sm-2 col-form-label">Name</label>
+                    <div class="col-10">
+                      <input class="form-control form-control-sm" type="text" [(ngModel)]='name' placeholder="">
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="staticEmail" class="col-sm-4 col-form-label">Helping Text</label>
+                    <div class="col-8">
+                      <input class="form-control form-control-sm" type="text" [(ngModel)]='helptext' placeholder="">
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="staticEmail" class="col-sm-2 col-form-label">Alias</label>
+                    <div class="col-10">
+                      <input class="form-control form-control-sm" type="text" placeholder="" [(ngModel)]='alias' >
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="staticEmail" class="col-6 col-form-label">Date range from</label>
+                    <div class="col-6">
+                      <input class="form-control form-control-sm" type="date" placeholder=""  [(ngModel)]='rangeFrom' >
+                    </div>
+                    <label for="staticEmail" class="col-6 col-form-label">To</label>
+                    <div class="col-6">
+                      <input class="form-control form-control-sm" type="date" placeholder="" [(ngModel)]='rangeTo' >
+                    </div>
+                  </div>
+                  <div class="form-check">
+                    <label class="form-check-label">
+                      <input type="checkbox" class="form-check-input"  [checked]="required" (change)='checked()'>
+                        &nbsp; Required
+                    </label>
+                  </div>
+                </div>
+
+                <!-- Time Input s8 -->
+                <div class="tab-pane" id="s8" role="tabpanel">
+                  <h4>Time Input</h4>
+                  <br>
+                  <div class="form-group row">
+                    <label for="staticEmail" class="col-sm-2 col-form-label">Name</label>
+                    <div class="col-10">
+                      <input class="form-control form-control-sm" type="text" [(ngModel)]='name' placeholder="">
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="staticEmail" class="col-sm-4 col-form-label">Helping Text</label>
+                    <div class="col-8">
+                      <input class="form-control form-control-sm" type="text" [(ngModel)]='helptext' placeholder="">
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="staticEmail" class="col-sm-2 col-form-label">Alias</label>
+                    <div class="col-10">
+                      <input class="form-control form-control-sm" type="text" placeholder="" [(ngModel)]='alias' >
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="staticEmail" class="col-6 col-form-label">Time range from</label>
+                    <div class="col-6">
+                      <input class="form-control form-control-sm" type="time" placeholder=""  [(ngModel)]='rangeFrom' >
+                    </div>
+                    <label for="staticEmail" class="col-6 col-form-label">To</label>
+                    <div class="col-6">
+                      <input class="form-control form-control-sm" type="time" placeholder="" [(ngModel)]='rangeTo' >
+                    </div>
+                  </div>
+                  <div class="form-check">
+                    <label class="form-check-label">
+                      <input type="checkbox" class="form-check-input"  [checked]="required" (change)='checked()'>
+                        &nbsp; Required
+                    </label>
+                  </div>
+                </div>
+
+                <!-- Radio Input s9 -->
+                <div class="tab-pane " id="s9" role="tabpanel">
+                  <h5>Radio Input</h5>
+                  <br>
+                  <div class="form-group row">
+                    <label for="staticEmail" class="col-sm-2 col-form-label">Name</label>
+                    <div class="col-10">
+                      <textarea class="form-control form-control-sm" [(ngModel)]='name' rows="3" > </textarea>
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="staticEmail" class="col-sm-4 col-form-label">Helping Text</label>
+                    <div class="col-8">
+                      <input class="form-control form-control-sm" type="text" [(ngModel)]='helptext' placeholder="">
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="staticEmail" class="col-sm-2 col-form-label">Alias</label>
+                    <div class="col-10">
+                      <input class="form-control form-control-sm" type="text" placeholder="" [(ngModel)]='alias' >
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="staticEmail" class="col-sm-2 col-form-label">Inputs </label>
+
+                    <div class="col-7">
+                      <input class="form-control form-control-sm" type="text" [(ngModel)]='opti' placeholder="">
+
+                    </div>
+
+                    <div class="col-3">
+                     <button type="button" (click)="addInOptionArray()">+</button>
+                     <button type="button" (click)="truncate()" >X</button>
+                    </div>
+
+                    <div *ngFor="let op of optionArray; let i = index"  class="col-12" >
+                      <div class="row" >
+                        <div class="col-10" >
+                          <i class="fa fa-arrow-right" aria-hidden="true"></i> {{i+1}}. <span style="background-color:#d2f5aa" > {{op}} </span>
+                        </div>
+                        <div class="col-2" >
+                          <button type="button" (click)="spliceOptionArray(i)" >X</button>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="col-12">
+                      <label for="staticEmail" class="col-sm-4 col-form-label"> Selected </label>
+                      <input class="form-control form-control-sm" type="text" placeholder="" [(ngModel)]='value'>
+                    </div>
+
+                  </div>
+
+                  <div class="form-check">
+                    <label class="form-check-label">
+                      <input type="checkbox" class="form-check-input"  [checked]="required" (change)='checked()'>
+                        &nbsp; Required
+                    </label>
+                  </div>
+                </div>
+
+                <!-- Checkbox Input s10 -->
+                <div class="tab-pane" id="s10" role="tabpanel">
+                  <h5>Checkbox Input</h5>
+                  <br>
+                  <div class="form-group row">
+                    <label for="staticEmail" class="col-sm-2 col-form-label">Name</label>
+                    <div class="col-10">
+                      <textarea class="form-control form-control-sm" [(ngModel)]='name' rows="3" > </textarea>
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="staticEmail" class="col-sm-4 col-form-label">Helping Text</label>
+                    <div class="col-8">
+                      <input class="form-control form-control-sm" type="text" [(ngModel)]='helptext' placeholder="">
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="staticEmail" class="col-sm-2 col-form-label">Alias</label>
+                    <div class="col-10">
+                      <input class="form-control form-control-sm" type="text" placeholder="" [(ngModel)]='alias' >
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="staticEmail" class="col-sm-2 col-form-label">Inputs </label>
+
+                    <div class="col-7">
+                      <input class="form-control form-control-sm" type="text" [(ngModel)]='opti' placeholder="">
+
+                    </div>
+
+                    <div class="col-3">
+                     <button type="button" (click)="addInOptionArray()">+</button>
+                     <button type="button" (click)="truncate()" >X</button>
+                    </div>
+
+                    <div *ngFor="let op of optionArray; let i = index"  class="col-12" >
+                      <div class="row" >
+                        <div class="col-10" >
+                          <i class="fa fa-arrow-right" aria-hidden="true"></i> {{i+1}}. <span style="background-color:#d2f5aa" > {{op}} </span>
+                        </div>
+                        <div class="col-2" >
+                          <button type="button" (click)="spliceOptionArray(i)" >X</button>
+                        </div>
+                      </div>
+                    </div>
+
+
+                    <!-- <label for="staticEmail" class="col-sm-4 col-form-label">Checked seperated by comas ','</label>
+                    <div class="col-8">
+                      <textarea class="form-control form-control-sm" rows='2' placeholder="" [(ngModel)]='values' > </textarea>
+                    </div> -->
+
+                    <label for="staticEmail" class="col-sm-4 col-form-label">Checked values</label>
+                    <br>
+                    <div *ngFor='let opt of optionArray; let i=i' >
+                      <label class = "">
+
+                         <input #flag type = "checkbox"  name="checkbox" value={{opt}} (change)='getVal1(flag.checked,opt)' >
+                         <span class = "mdl-checkbox__label"> {{opt}} &nbsp; &nbsp; </span>
+                      </label>
+                    </div>
+
+
+                  </div>
+
+                  <div class="form-check">
+                    <label class="form-check-label">
+                      <input type="checkbox" class="form-check-input"  [checked]="required" (change)='checked()'>
+                        &nbsp; Required
+                    </label>
+                  </div>
+                </div>
+
+                <!-- Dropdown Input s11 -->
+                <div class="tab-pane" id="s11" role="tabpanel">
+                  <h5>Dropdown  Input</h5>
+                  <br>
+                  <div class="form-group row">
+                    <label for="staticEmail" class="col-sm-2 col-form-label">Name</label>
+                    <div class="col-10">
+                      <textarea class="form-control form-control-sm" [(ngModel)]='name' rows="3" > </textarea>
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="staticEmail" class="col-sm-4 col-form-label">Helping Text</label>
+                    <div class="col-8">
+                      <input class="form-control form-control-sm" type="text" [(ngModel)]='helptext' placeholder="">
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="staticEmail" class="col-sm-2 col-form-label">Alias</label>
+                    <div class="col-10">
+                      <input class="form-control form-control-sm" type="text" placeholder="" [(ngModel)]='alias' >
+                    </div>
+                  </div>
+
+                  <div class="form-group row">
+                    <label for="staticEmail" class="col-sm-2 col-form-label">Inputs </label>
+
+                    <div class="col-7">
+                      <input class="form-control form-control-sm" type="text" [(ngModel)]='opti' placeholder="">
+                    </div>
+
+                    <div class="col-3">
+                     <button type="button" (click)="addInOptionArray()">+</button>
+                     <button type="button" (click)="truncate()" >X</button>
+                    </div>
+
+                    <div *ngFor="let op of optionArray; let i = index"  class="col-12" >
+                      <div class="row" >
+                        <div class="col-10" >
+                          <i class="fa fa-arrow-right" aria-hidden="true"></i> {{i+1}}. <span style="background-color:#d2f5aa" > {{op}} </span>
+                        </div>
+                        <div class="col-2" >
+                          <button type="button" (click)="spliceOptionArray(i)" >X</button>
+                        </div>
+                      </div>
+                    </div>
+
+                    <label for="staticEmail" class="col-sm-4 col-form-label">Default value</label>
+                    <div class="col-8">
+                      <input class="form-control form-control-sm" type="text" placeholder="" [(ngModel)]='value' >
+                    </div>
+
+                  </div>
+
+                  <div class="form-check">
+                    <label class="form-check-label">
+                      <input type="checkbox" class="form-check-input"  [checked]="required" (change)='checked()'>
+                        &nbsp; Required
+                    </label>
+                  </div>
+                </div>
+
+                <!-- Slider Input s12 -->
+                <div class="tab-pane" id="s12" role="tabpanel">
+                  <h5>Slider  Input</h5>
+                  <br>
+                  <div class="form-group row">
+                    <label for="staticEmail" class="col-sm-2 col-form-label">Name</label>
+                    <div class="col-10">
+                      <input class="form-control form-control-sm" type="text" [(ngModel)]='name' placeholder="">
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="staticEmail" class="col-sm-4 col-form-label">Helping Text</label>
+                    <div class="col-8">
+                      <input class="form-control form-control-sm" type="text" [(ngModel)]='helptext' placeholder="">
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="staticEmail" class="col-sm-2 col-form-label">Alias</label>
+                    <div class="col-10">
+                      <input class="form-control form-control-sm" type="text" placeholder="" [(ngModel)]='alias' >
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="staticEmail" class="col-sm-4 col-form-label">Range from</label>
+                    <div class="col-3">
+                      <input class="form-control form-control-sm" type="number" placeholder=""  [(ngModel)]='rangeFrom' >
+                    </div>
+                    <label for="staticEmail" class="col-sm-2 col-form-label"> To</label>
+                    <div class="col-3">
+                      <input class="form-control form-control-sm" type="number" placeholder="" [(ngModel)]='rangeTo' >
+                    </div>
+                    <label for="staticEmail" class="col-sm-4 col-form-label"> Initial value</label>
+                    <div class="col-3">
+                      <input class="form-control form-control-sm" type="number" placeholder="" [(ngModel)]='value' >
+                    </div>
+                  </div>
+
+                  <div class="form-check">
+                    <label class="form-check-label">
+                      <input type="checkbox" class="form-check-input"  [checked]="required" (change)='checked()'>
+                        &nbsp; Required
+                    </label>
+                  </div>
+
+                </div>
+
+              </div>
+            </div>
+
+          </div>
+        </div>
+        <div class="clearfix"></div>
+
+      </div>
+
+      <!-- File & media tab -->
+      <div class="tab-pane" id="m2" role="tabpanel">
+
+        <div class="" >
+          <div class="row justify-content-center m-0" >
+
+            <div class="col-2 modal-height slider-bg" style="background:#fff;height:290px;">
+              <ul class="nav flex-column text-left " role="tablist">
+                <li class="nav-item"><a class="nav-link " data-toggle="tab" href="#f1" role="tab" (click)='inputType("file")'>File </a></li>
+                <!-- <li class="nav-item"><a class="nav-link " data-toggle="tab" href="#f2" role="tab" (click)='inputType("location")'>Location </a></li>
+                <li class="nav-item"><a class="nav-link " data-toggle="tab" href="#f3" role="tab" (click)='inputType("camera")'>Camera </a></li>
+                <li class="nav-item"><a class="nav-link " data-toggle="tab" href="#f4" role="tab" (click)='inputType("video")'>Video </a></li> -->
+              </ul>
+            </div>
+
+            <div class="col-10 modal-height" >
+
+              <div class="tab-content" >
+
+                <!-- File Input f1-->
+                <div class="tab-pane active" id="f1" role="tabpanel">
+                  <h4>File input</h4>
+                  <br>
+                  <div class="form-group row">
+                    <label for="staticEmail" class="col-sm-2 col-form-label">Name</label>
+                    <div class="col-10">
+                      <textarea class="form-control form-control-sm" [(ngModel)]='name' rows="3" > </textarea>
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="staticEmail" class="col-sm-4 col-form-label">Helping Text</label>
+                    <div class="col-8">
+                      <input class="form-control form-control-sm" type="text" [(ngModel)]='helptext' placeholder="">
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="staticEmail" class="col-sm-2 col-form-label">Alias</label>
+                    <div class="col-10">
+                      <input class="form-control form-control-sm" type="text" placeholder="" [(ngModel)]='alias' >
+                    </div>
+                  </div>
+
+                  <div class="form-group row">
+                    <label for="staticEmail" class="col-sm-4 col-form-label">File type</label>
+                    <div class="col-8">
+                      <div *ngFor='let opt of fileTypes; let i=i' >
+
+                        <input #flag type="checkbox" value={{opt}} name="checkbox" (change)='getVal(flag.checked,opt)' [checked]='checkVal(opt)'> {{opt}}
+
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="form-check">
+                    <label class="form-check-label">
+                      <input type="checkbox" class="form-check-input"   [checked]="required" (change)='checked()'>
+                        &nbsp; Required
+                    </label>
+                  </div>
+
+                </div>
+
+                <!-- Location Input f2-->
+                <div class="tab-pane " id="f2" role="tabpanel">
+                  <br>
+                  <div class="form-group row">
+                    <label for="staticEmail" class="col-sm-2 col-form-label">Name</label>
+                    <div class="col-10">
+                      <textarea class="form-control form-control-sm" [(ngModel)]='name' rows="3" > </textarea>
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="staticEmail" class="col-sm-4 col-form-label">Helping Text</label>
+                    <div class="col-8">
+                      <input class="form-control form-control-sm" type="text" [(ngModel)]='helptext' placeholder="">
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="staticEmail" class="col-sm-2 col-form-label">Alias</label>
+                    <div class="col-10">
+                      <input class="form-control form-control-sm" type="text" placeholder="" [(ngModel)]='alias' >
+                    </div>
+                  </div>
+                  <!-- <h4>Geo Location</h4>
+                  <p>
+                    Get geolocation from where the form will be submitted
+                  </p>
+                  <p>
+                    Geo location will not be visible on the form. Geo location will be displayed on the responce table under column name "Form submitted location".
+                  </p>
+                  <br> -->
+
+                </div>
+
+                <!-- Camera Input f3-->
+                <div class="tab-pane " id="f3" role="tabpanel">
+                  <h4>Camera input</h4>
+                  <br>
+                  <div class="form-group row">
+                    <label for="staticEmail" class="col-sm-2 col-form-label">Name</label>
+                    <div class="col-10">
+                      <textarea class="form-control form-control-sm" [(ngModel)]='name' rows="3" > </textarea>
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="staticEmail" class="col-sm-4 col-form-label">Helping Text</label>
+                    <div class="col-8">
+                      <input class="form-control form-control-sm" type="text" [(ngModel)]='helptext' placeholder="">
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="staticEmail" class="col-sm-2 col-form-label">Alias</label>
+                    <div class="col-10">
+                      <input class="form-control form-control-sm" type="text" placeholder="" [(ngModel)]='alias' >
+                    </div>
+                  </div>
+
+                  <div class="form-group row">
+                    * Captured image will be geo tagged
+                  </div>
+
+                  <div class="form-check">
+                    <label class="form-check-label">
+                      <input type="checkbox" class="form-check-input"   [checked]="required" (change)='checked()'>
+                        &nbsp; Required
+                    </label>
+                  </div>
+                </div>
+
+                <!-- Audio Input f4 -->
+                <div class="tab-pane " id="f4" role="tabpanel">
+                  <h4>Video input</h4>
+                  <br>
+                  <div class="form-group row">
+                    <label for="staticEmail" class="col-sm-2 col-form-label">Name</label>
+                    <div class="col-10">
+                      <textarea class="form-control form-control-sm" [(ngModel)]='name' rows="3" > </textarea>
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="staticEmail" class="col-sm-4 col-form-label">Helping Text</label>
+                    <div class="col-8">
+                      <input class="form-control form-control-sm" type="text" [(ngModel)]='helptext' placeholder="">
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="staticEmail" class="col-sm-2 col-form-label">Alias</label>
+                    <div class="col-10">
+                      <input class="form-control form-control-sm" type="text" placeholder="" [(ngModel)]='alias' >
+                    </div>
+                  </div>
+
+                  <div class="form-group row">
+                    * Captured video will be geo tagged
+                  </div>
+
+                  <div class="form-check">
+                    <label class="form-check-label">
+                      <input type="checkbox" class="form-check-input"   [checked]="required" (change)='checked()'>
+                        &nbsp; Required
+                    </label>
+                  </div>
+                </div>
+
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+        <div class="clearfix"></div>
+
+      </div>
+
+      <!-- Interface tab -->
+      <div class="tab-pane" id="m3" role="tabpanel">
+        <div class="col-sm-12 p-3">
+          <div class="modal-height" >
+            <h4>Section break</h4>
+            <br>
+            <div class="form-group row " style="width:90%">
+              <label class="col-sm-11 col-form-label">Section break title</label>
+              <div class="col-12">
+                <textarea class="form-control form-control-sm" [(ngModel)]='name' rows="3" > </textarea>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Template tab -->
+      <div class="tab-pane" id="m4" role="tabpanel " style="height:320px; overflow-x:hidden ">
+        <app-template-tab-content></app-template-tab-content>
+      </div>
+
+    </div>
+
+  </div>
+</div>
+<div class="modal-footer" >
+  <button type="button" class="btn btn-secondary col-sm-3 pt-3 pb-3" data-dismiss="modal">Close</button>
+  <button type="button" class="btn btn-primary col-sm-4 pt-3 pb-3" (click)='addElement()'  data-dismiss="modal" >Add element</button>
+</div>

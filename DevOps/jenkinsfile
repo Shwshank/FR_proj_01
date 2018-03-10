@@ -1,0 +1,34 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Test APIService url') {
+            steps {
+                sh('chmod +x -R DevOps/curltest.sh')
+                sh('DevOps/curltest.sh')
+                echo 'Curl Tested'
+            }
+        }
+        stage('Build') {
+            steps {
+                echo "Docker build executing.."
+                sh('chmod +x -R DevOps/dockerbuild.sh')
+                sh('DevOps/dockerbuild.sh')
+                echo  "Docker executed"
+            }
+        }
+        stage('Test') {
+            steps {
+                echo 'Curl testing...'
+                sh('chmod +x -R DevOps/curltest.sh')
+                sh('DevOps/curltest.sh')
+                echo 'Curl Tested'
+            }
+        }
+        stage('Deploy') {
+            steps {
+                echo 'Deployed... Bye'
+            }
+        }
+    }
+}

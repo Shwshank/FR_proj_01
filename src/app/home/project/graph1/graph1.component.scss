@@ -1,0 +1,28 @@
+@import "~styles.scss";
+
+.graph-icon{
+  height: 140px;
+  border: 3px solid $light-highlight;
+  margin: auto;
+  margin-top: 25px;
+  min-width: 140px;
+  max-width: 140px;
+  border-radius: 50%;
+  background: radial-gradient(circle, $light-highlight2, $secondary-color);
+  font-size: 2.3rem;
+  color: $text-color-darkset2;
+  padding-top: .9rem;
+  -webkit-transition: .7s; /* Safari */
+  transition: .7s;
+}
+
+.graph-icon:hover{
+
+  border: 3px solid $secondary-color;
+}
+
+.display-size{
+  color: $secondary-color;
+  font-size: 1.3rem;
+  font-weight: 500;
+}

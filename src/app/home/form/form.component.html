@@ -1,0 +1,189 @@
+<div class="container-fluid mt-4 text-center" style="background:#fff; box-shadow:0 1px 1px #a9a8a9; min-height:90vh">
+    <br />
+    <button type="button" class="btn btn-primary col-sm-5 col-md-4 col-lg-2 pt-3 pb-3" (click)='new()'>+ New</button>
+    <ul class="nav nav-tabs justify-content-center mt-4">
+      <li class="nav-item"><a class="nav-link active" data-toggle="tab" role="tab" href="#form">Papers</a></li>
+      <li class="nav-item"><a class="nav-link " data-toggle="tab" role="tab" href="#template">Templates</a></li>
+    </ul>
+    <div class="col-lg-12 col-md-12 row col-sm-12 ml-0 mt-5 mb-3 justify-content-md-center fn" style="display:none;">
+      <div class="row col-lg-9 col-md-12 text-center bbot">
+        <a class="col-lg-2 col-md-2 col-sm-2 col-xs-2 active">Papers</a>
+        <a class="col-lg-2 col-md-2 col-sm-2 col-xs-2 strt">Templates</a>
+      </div>
+    </div>
+  <div class="tab-content">
+      <div class="tab-pane active" id="form" role="tabpanel" >
+        <br>
+        <div class="row text-left" >
+          <div *ngFor='let form of formArray; let i = index' class="col-lg-4 col-md-5 col-sm-6" style="margin-bottom:15px; position: relative">
+            <div class="card cbx cbx11">
+              <div class="statusTag" *ngIf="form.Details.status=='Online'"> &nbsp; {{form.Details.status}} &nbsp; </div>
+              <div class="card-block p-0">
+                <div class="col-sm-12  mt-2">
+                  <h5 class="card-title col-sm-12">{{form.Details.name | shorten: 40: '...'}}</h5>
+                  <h5 class="card-subtitle col-sm-12 mb-2 text-muted"> <b> {{form.Details.project | shorten: 24: '...'}} </b> </h5>
+                </div>
+                <div class="col-sm-12 row m-0">
+                  <p class="card-text col-sm-12"> </p>
+
+                  <br>
+
+                  <!-- <a href="" class="col-1" ></a> -->
+
+                  <a class="col-5" >
+                    <input type="checkbox" class="form-check-input" [checked]=checkStatus(form.Details.cid) (change)='changeStatus(form.Details.cid)' class="checkStyle">
+                    {{form.Details.status}}
+                    <span class="checkmark"></span>
+                  </a>
+
+                  <a href="#"  [routerLink]="['../formBuilder']" [queryParams]="{formID : form.Details.cid }" style="font-size:1.3rem" >View Paper</a>
+
+                </div>
+                <!-- <span style="color: #e91e63; " > {{form.Details.responses}} </span>                 -->
+                <div class="col-11  pr-1 pb-4 mt-4  mb-3">
+                  <!-- <button style="float: left" (click)='rule(form.Rules, form.Details.cid, form.Elements)' type="button" class="btn btn-primary " data-toggle="modal" data-target="#rules">Rule/s</button> -->
+                  <button style="margin-left:15px; float: left" (click)='getResponse(form.Details.cid)' type="button" class="btn btn-primary " data-toggle="modal" data-target="#rules">  Responses </button>
+                  <span class="responseCount" >  {{form.Details.responses}}  </span>
+                </div>
+                <br>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      <br>
+      <button type="button" class="btn btn-primary mb-5 col-sm-5 col-md-4 col-lg-2 pt-3 pb-3" (click)='syncCollectFrom($event)'><i class="fa fa-refresh" aria-hidden="true"></i> 1. Sync Paper</button>
+      &nbsp;
+      <!-- <button type="button" class="btn btn-primary mb-5 col-sm-5 col-md-4 col-lg-2 pt-3 pb-3" (click)='syncCollectFromRule($event)'><i class="fa fa-refresh" aria-hidden="true"></i> 2. Sync Rules</button> -->
+
+      </div>
+      <div class="tab-pane " id="template" role="tabpanel" >
+        <br>
+        <div class="row justify-content-center" >
+          <div *ngFor='let temp of templateArray; let i = index' class="col-4 "  style="margin-bottom:15px">
+            <div class="card cbx">
+              <div class="card-block">
+                <h4 class="card-title">{{temp.Details.name}}</h4>
+                <h6 class="card-subtitle mb-2 text-muted">Some text here...</h6>
+                <p class="card-text">{{temp.Details.desc}}</p>
+                <a class="card-link" [routerLink]="['../formBuilder']" [queryParams]="{templateID : temp.Details.cid }" >View template</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+  </div>
+</div>
+
+<!-- rule modal starts here-->
+<div class="modal fade" id="rules" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document" >
+    <div class="modal-content"  style="width:703px">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Rules</h5>
+      </div>
+      <div class="modal-body text-center" style="overflow-y: auto; height:700px; width:700px">
+          <div class="row justify-content-center" >
+            <div *ngIf='rulesArray.length < 1' >
+              <h4> No Rule was created </h4>
+            </div>
+            <div *ngFor='let rule of rulesArray; let i = index ' class="col-5 text-center" style="overflow:auto; border: 2px solid gray; border-radius: 4px; height: 230px;  margin:6px" >
+                <h5>{{i+1}}. Rule Name: {{rule.name}} </h5>
+
+                <hr>
+                Template: <b>{{rule.tempName}}</b>
+                <hr>
+
+                <p>Q. {{rule.elementName}}</p>
+                <p>A. {{rule.elementValue}}</p>
+                <p> Match all (if multiple values): {{rule.satisfyAll}}</p>
+
+                <div *ngIf='rule.tempName == "Form question"'>
+                  Associate Q: {{rule.ruleFormQuestion.name}}
+                  <div *ngIf="rule.ruleFormQuestion.option" >
+                    <div *ngIf="rule.ruleFormQuestion.option.length" >
+                      <div *ngFor="let m of rule.ruleFormQuestion.option" >
+                        <p> <i class="fa fa-arrow-right" aria-hidden="true"></i> {{m}} </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- <p>Condition: {{rule.elementValue}} </p> -->
+                <!-- <a class="card-link" href="#" >Edit</a> -->
+                <button type="button" class="btn btn-primary " (click)="deleteRule(rule.cid)"> <b>X</b> </button>
+              </div>
+          </div>
+        <!-- <a href="#"  class="text-center">Add Rule</a> -->
+
+      </div>
+      <div class="modal-footer"  >
+        <button type="button" class="btn btn-primary col-sm-3 " data-toggle="modal" data-target="#addRules" >Add rule</button>
+        <button type="button" class="btn btn-secondary col-sm-3 " data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- rule modal ends here-->
+
+
+<!--Add rule modal starts here-->
+<div class="modal fade" id="addRules" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">+ Add Rules</h5>
+      </div>
+      <div class="modal-body text-center" style="height:300px; overflow-y: auto">
+
+        <input type="text" name="" value="" [(ngModel)]='ruleName' placeholder="Rule Name" class="col-12 form-control mb-5" />
+
+        <label class="row ml-0 mr-0 col-12 pl-0 pr-0">
+          <span class="col-4 pl-0 pr-0 pt-2 text-left">1. Select element :</span>
+          <select [(ngModel)]="ruleElement" (change)='getVal()' class="col-4 form-control">
+            <option *ngFor='let opt of rnameArray; let i=i' [ngValue]=opt  >{{opt.name}}</option>
+          </select>
+        </label>
+
+        <label class="row ml-0 mr-0 col-12 pl-0 pr-0">
+          <span class="col-4 pl-0 pr-0 pt-2 text-left">2. Condition : Equals</span>
+        </label>
+
+        <label class="row ml-0 mr-0 col-12 pl-0 pr-0">
+          <span class="col-4 pl-0 pr-0 pt-2 text-left">3. Value :</span>
+
+          <input *ngIf="!multiOption" type="text" name="" value="" [(ngModel)]='ruleTarget' class="col-4 form-control" />
+
+          <ss-multiselect-dropdown *ngIf="multiOption" [options]="ruleOptions" [(ngModel)]="ruleTargetM" (ngModelChange)="onChangeRuleOption($event)"></ss-multiselect-dropdown>
+
+          <br>
+          <!-- <i *ngIf='hint' > hint: {{hint}}</i>
+          <! css not Defined yet-->
+          <!-- <i>(* If multiple, saparated by commas)</i> -->
+        </label>
+
+        <input type="checkbox" class="form-check-input" [checked]="satisfyAll" (change)='satisfyAllCondition()'> Satisfy all conditions (Only if multiple!)
+
+        <label class="row ml-0 mr-0 col-12 pl-0 pr-0">
+          <span class="col-4 pl-0 pr-0 pt-2 text-left">4. Associate template:</span>
+          <select [(ngModel)]="ruleTempTail" class="col-4 form-control">
+            <option *ngFor='let opt of templateArray; let i=i' [ngValue]=opt  >{{opt.Details.name}}</option>
+          </select>
+        </label>
+
+        - - OR - -
+        <label class="row ml-0 mr-0 col-12 pl-0 pr-0">
+          <span class="col-4 pl-0 pr-0 pt-2 text-left">&nbsp;  Associate form element</span>
+          <select [(ngModel)]="ruleFormQuestion" class="col-4 form-control">
+            <option *ngFor='let opt of rnameArray; let i=i' [ngValue]=opt  >{{opt.name}}</option>
+          </select>
+        </label>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary col-sm-3 pt-3 pb-3" (click)='conformRule()'  >Create rule</button>
+        <button type="button" class="btn btn-secondary col-sm-3 pt-3 pb-3" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!--Add rule modal ends here-->

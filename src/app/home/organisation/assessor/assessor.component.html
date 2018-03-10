@@ -1,0 +1,97 @@
+<div class="container-fluid mt-4 pb-3 text-center" style="background:#fff;">
+
+  <button type="button" class="btn btn-primary col-sm-3 col-md-2 pt-3 pb-3" (click)='assesor()'>+ Student</button>
+
+    <table *ngIf='flag' id="example01" class="table table-striped " cellspacing="0" width="100%">
+        <thead>
+            <tr>
+                <th></th>
+                <th>Student</th>
+                <th>Phone</th>
+                <th>Paper</th>
+                <!-- <th>Details</th> -->
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor='let res of users; let i = index'>
+                <td>{{i+1}}</td>
+                <td>{{res.name}}</td>
+                <td>{{res.phone}}</td>
+                <td>
+                    <button type="button" class="btn btn-primary tt1" (click)='showProjectModal(res.name, res.cid, res.form)' >
+                      {{calForms(res.form)}} Papers
+                      <span class="tt2" > &nbsp; {{projectForm(res.form)}}  &nbsp; </span>
+                    </button>
+                    <!-- <span class="tt1" > {{projectForm(res.form) | shorten: 5: '...'}}
+                      <span class="tt2" > {{projectForm(res.form)}} </span>
+                    </span> -->
+                </td>
+                <!-- <td>
+                  <button type="button" class="btn btn-primary ">  {{res.details}}  </button>
+                </td> -->
+            </tr>
+      </tbody>
+    </table>
+
+</div>
+
+<!-- Add assesor model -->
+<div class="modal fade" id="newAssessorModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Add new Student</h5>
+      </div>
+      <div class="modal-body text-center" style="height:300px; overflow-y: auto">
+          <div class="row justify-content-center" >
+            <input type="text" name="" value="" [(ngModel)]='assessorName' placeholder="Name" class="col-8 form-control mb-5" />
+            <br>
+            <input type="text" name="" value="" [(ngModel)]='assessorPhone' placeholder="Phone no." class="col-8 form-control mb-5" />
+            <br>
+            <select [(ngModel)]="formAssociate" class="col-8 form-control mb-5" >
+              <option *ngFor='let opt of formArray; let i=i' [ngValue]=opt.Details  >{{opt.Details.name + " " + opt.Details.project}}</option>
+            </select>
+          </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary col-sm-3 pt-3 pb-3" data-toggle="modal" data-target="#addRules" (click)='saveAssessor()'>Add </button>
+        <button type="button" class="btn btn-secondary col-sm-3 pt-3 pb-3" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Add assesor model -->
+
+<!-- assesor form model -->
+<div class="modal fade" id="assessorFormModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Associated paper for {{userProjectName}}</h5>
+      </div>
+      <div class="modal-body text-center" style="height:300px; overflow-y: auto">
+          <div class="row justify-content-center" >
+
+            {{userProjectName}} is  assigned with  paper/s :  <br>
+
+            <div  class="col-12" *ngFor="let pro of assessorFormArray; let i = index">{{i+1}}. {{pro.name+" "+pro.project}} <i class="fa fa-trash-o" aria-hidden="true" (click)='deleteFormAssessorArray(pro.cid, pro.projectcdi)' ></i> <br> </div>
+            <br>
+            <br>
+            <br>
+            <div class="col-12" >Assign new Subject : </div>
+            <select [(ngModel)]="projectAs" class="col-8 form-control mb-5" >
+              <option *ngFor='let opt of formArray; let i=i' [ngValue]=opt  >{{opt.Details.name + " " + opt.Details.project}}</option>
+            </select>
+            <div  class="col-12"></div>
+            <button type="button" class="btn btn-primary" data-toggle="modal"  (click)='assignNewProject()'>Assign</button>
+
+          </div>
+      </div>
+      <div class="modal-footer">
+
+        <button type="button" class="btn btn-secondary col-sm-3 pt-3 pb-3" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- assesor form model -->

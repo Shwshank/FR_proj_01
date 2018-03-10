@@ -1,0 +1,17 @@
+<div class="form-group row  text-center">
+  <label for="staticEmail" class="col-sm-12 col-form-label text-left">  &nbsp; {{funID(id)}}. {{name}} </label>
+  <div class="col-12 text-left">
+    <select [(ngModel)]="selectedValue" >
+
+      <option *ngFor='let opt of option; let i=i' [ngValue]=opt  [selected]="opt == value">{{opt}}</option>
+
+    </select>
+
+  </div>
+  <div class="col-2" ></div>
+  <div class="col-12 text-left" >
+    <!-- <i *ngIf='id > 0' class="fa fa-arrow-up" aria-hidden="true" (click)='upElement(id)'></i> &nbsp;
+    <i class="fa fa-arrow-down" aria-hidden="true" (click)='downElement(id)'></i> &nbsp; -->
+    <i class="fa fa-trash-o" aria-hidden="true" (click)='deleteElement(id)' ></i>
+  </div>
+</div>

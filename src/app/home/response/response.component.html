@@ -1,0 +1,108 @@
+<style >
+  .responseImg{
+    max-height: 60px;
+    border-radius: 2px;
+  }
+
+  table.dataTable thead .sorting,
+  table.dataTable thead .sorting_asc,
+  table.dataTable thead .sorting_desc {
+      background : none;
+  }
+</style>
+
+<div class="container-fluid mt-4 pb-3 text-center" style="background:#fff;">
+    <h2>Response Table</h2>
+    <div *ngIf='!flag'>
+      <br>
+      <br>
+      <br>
+      <br>
+      <h4>Seems like there is not data to display! Hang on while we check....</h4>
+      <br>
+      <br>
+      <br>
+    </div>
+
+    <table *ngIf='flag' id="example" class="table table-striped " cellspacing="0" width="100%">
+        <thead>
+            <tr>
+                <th></th>
+                <th>Paper</th>
+                <th>Project</th>
+                <th>Responces</th>
+                <!-- <th>Details</th> -->
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor='let res of response; let i = index'>
+                <td>{{i+1}}</td>
+                <td>
+                  <span class="tt1" > {{res.fname | shorten: 35: '...'}}
+                    <span class="tt2" > &nbsp; {{res.fname}} &nbsp; </span>
+                  </span>
+                </td>
+                <td>
+                  <span class="tt1" > {{res.pname | shorten: 35: '...'}}
+                    <span class="tt2" > &nbsp; {{res.pname}} &nbsp; </span>
+                  </span>
+                </td>
+                <td>
+                  <button type="button" class="btn btn-primary" (click)='getData(res.fid)' [disabled]="resMoreThanZero(res.responses)" > {{res.responses}} Responses  </button>
+                </td>
+                <!-- <td>
+                  <button type="button" class="btn btn-primary" (click)="details(i)">  Details  </button>
+                </td> -->
+            </tr>
+      </tbody>
+    </table>
+
+    <!-- <button type="button" class="btn btn-primary col-sm-3 col-md-2 pt-3 pb-3 mt-4" (click)='reload()'>Reload</button> -->
+</div>
+
+<!-- Form Detials Stats Here -->
+<div class="modal fade" id="responseDetails" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content" style="width:600px; height:650px;">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Summary</h5>
+      </div>
+      <div class="modal-body text-center" style=" overflow-y: auto">
+        <div class="container-fluid">
+          <div class="row justify-content-center">
+            <div class="col-10">
+              <h4> Project Name </h4> <br>
+                <h5>Form Name</h5>
+            </div>
+            <div class="col-11">
+              Form Version 1.3
+            </div>
+            <div class="col-11" style="height:150px; overflow-y: auto; border: 2px solid gray; ">
+            </div>
+            <div class="col-11" style="margin-top: 30px">
+              <!-- <button type="button" name="button" class=" btn  btn-primary"> 52 Responces </button> -->
+              <h3 class="primaryText" >54 Responses </h3>
+              <button type="button" name="button" class="flaggedTag">4 Flagged</button>
+              <button type="button" name="button" class="pendingTag">3 Pending</button>
+              <button type="button" name="button" class="verifiedTag">6 Verified</button>
+              <button type="button" name="button" class="archivedTag">10 Archived</button>
+
+            </div>
+
+            <div class="col-11 text-left"  style="margin-top: 30px">
+                <i class="fas fa-arrow-alt-right"></i> <b> Created by : </b> Sam Roster <br>
+                <i class="fas fa-arrow-alt-right"></i> <b> Time : </b> 31st Dec, 2017 <br>
+                <i class="fas fa-arrow-alt-right"></i> <b> Description : </b> Description Goes here! <br>
+            </div>
+
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <!-- <button type="button" class="btn btn-primary col-sm-3 pt-3 pb-3" data-toggle="modal" data-target="#addRules" (click)='saveUser()'>Add user</button> -->
+        <button type="button" class="btn btn-secondary col-sm-3 pt-3 pb-3" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Form Detials Ends Here -->

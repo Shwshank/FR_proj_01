@@ -1,0 +1,11 @@
+<div class="form-group row  text-center">
+  <label for="staticEmail" class="col-sm-2 col-form-label text-left">  &nbsp; {{funID(id)}}. {{name}} </label>
+  <div class="col-8 text-left">
+    <input type="file" accept="video/*" capture="camcorder" />
+  </div>
+  <div class="col-2 text-left" >
+    <!-- <i *ngIf='id > 0' class="fa fa-arrow-up" aria-hidden="true" (click)='upElement(id)'></i> &nbsp;
+    <i class="fa fa-arrow-down" aria-hidden="true" (click)='downElement(id)'></i> &nbsp; -->
+    <i class="fa fa-trash-o" aria-hidden="true" (click)='deleteElement(id)' ></i>
+  </div>
+</div>

@@ -1,0 +1,279 @@
+<style >
+  .responseImg{
+    max-height: 60px;
+    border-radius: 3px;
+  }
+
+  table.dataTable thead .sorting,
+  table.dataTable thead .sorting_asc,
+  table.dataTable thead .sorting_desc {
+      background : none;
+  }
+</style>
+
+<div class="container-fluid mt-4 pb-3 text-center" style="background:#fff;">
+  <div *ngIf='!flag'>
+    <br>
+    <br>
+    <br>
+    <br>
+    <h4> Just a moment please....</h4>
+    <br>
+    <br>
+    <br>
+  </div>
+
+  <div class="" style=" width:100%;   overflow-x: auto">
+    <table *ngIf='flag' id="exampleFormResponse" class=" display table table-striped  table-responsive-md" cellspacing="0" >
+      <thead>
+          <tr>
+              <th></th>
+              <th>Details</th>
+              <th *ngFor="let head of header" style="white-space: nowrap; text-overflow: ellipsis;">
+                &nbsp;  {{head}} &nbsp;
+              </th>
+          </tr>
+      </thead>
+      <tfoot>
+        <tr>
+            <th style="opacity:0" ></th>
+            <th style="opacity:0" ></th>
+            <th></th>
+            <th  *ngFor="let head1 of headerMinusOne"  style="opacity:0">
+            </th>
+        </tr>
+      </tfoot>
+      <tbody>
+        <tr *ngFor='let res of response; let i = index'>
+              <td>{{i+1}}</td>
+              <td>
+                <button type="button" class="btn btn-primary" (click)='getDetails(i,res)' >  Details  </button>
+              </td>
+              <td *ngFor = 'let temp of res; let j = index' >
+
+                <span *ngIf='temp.type != "camera" &&  temp.type != "file" && temp.type != "video" && temp.type!= "tag" && temp.type!= "location"' >{{temp.value}}</span>  <!-- normal T E X T   V A L U E  -->
+
+                <span *ngIf='temp.type == "tag" ' >                                                                                              <!-- T A G G E D  V A L U E  -->
+                  <span style="display: none" >{{temp.value}} </span>
+                  <button *ngIf='temp.value == ""' class="noTag" (click)="changeTag(i, res)" > &nbsp;&nbsp; No-Tag &nbsp;&nbsp; </button>
+                  <button *ngIf='temp.value == "Flagged"'  class="flaggedTag" (click)="changeTag(i, res)" disabled> &nbsp; {{temp.value}} &nbsp; </button>
+                  <button *ngIf='temp.value == "Pending"'  class="pendingTag" (click)="changeTag(i, res)" disabled> &nbsp; {{temp.value}} &nbsp; </button>
+                  <button *ngIf='temp.value == "Verified"' class="verifiedTag"(click)="changeTag(i, res)" > &nbsp; {{temp.value}} &nbsp; </button>
+                  <button *ngIf='temp.value == "Archived"' class="archivedTag"(click)="changeTag(i, res)" > &nbsp;{{temp.value}}&nbsp; </button>
+
+                </span>
+
+                <span *ngIf='temp.type == "camera" ' > <img *ngIf='temp.value'  class="responseImg" src={{temp.value}} (click)='imageModal(temp.value,temp.location,temp.fileName)' style="max-width:60px" /> <span style="display: none" >{{temp.value}}</span> </span>  <!-- I M A G E   V A L U E  -->
+
+                <span *ngIf='temp.type == "video" ' > <video *ngIf='temp.value' class="responseImg" style="width:200px !important" controls> <source src={{temp.value}}> </video> <span style="display: none" >{{temp.value}}</span> </span>  <!-- V I D E O   V A L U E  -->
+
+                <span *ngIf='temp.type == "file" ' >
+                  <button  *ngIf='temp.value' type="button" class="btn btn-primary" (click)='openImageNewTab(temp.value)'>  <i class="fa fa-download" aria-hidden="true"></i>  </button>   <!-- F I L E   V A L U E  -->
+                  <span style="display: none" >{{temp.value}}</span>
+                </span>  <!-- F I L E   V A L U E  -->
+
+                <span *ngIf='temp.type == "location" ' >
+                  <!-- Latitude: {{temp.value.lat}} <br>
+                  Longitude: {{temp.value.lat}} <br>
+                  Accuracy: {{temp.value.acc}} -->
+                  <img [src]= getGoogleMap(temp.value.lat,temp.value.lng) alt="" (click)='locationModal(temp.value)'>
+                </span>
+
+              </td>
+          </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- Details modal starts here-->
+<div class="modal fade" id="getDetails" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content" style="width:600px; height:650px;">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Details</h5>
+      </div>
+      <div class="modal-body text-center" style="  height:640px;  overflow-y: auto">
+        <div *ngFor="let temp of detailRes; let i = index">
+          <hr>
+
+          <div class="row" style="padding-left:20px">
+            <b>{{header[i]}} : </b> &nbsp; &nbsp;
+          </div>
+
+          <div class="row" style="padding-left:20px">
+
+            <div class="col-10" >
+              <span *ngIf='temp.type != "camera" &&  temp.type != "file" && temp.type != "video" && temp.type !="tag" ' >{{temp.value}}</span>  <!-- normal T E X T   V A L U E  -->
+
+
+                <span *ngIf='temp.type == "tag" ' >                             <!-- T A G G E D  V A L U E  -->
+
+                  <button *ngIf='temp.value == ""' class="noTag" (click)="changeTag(i, detailRes)" disabled> &nbsp;&nbsp; No-Tag &nbsp;&nbsp; </button>
+                  <button *ngIf='temp.value == "Flagged"'  class="flaggedTag" (click)="changeTag(i, detailRes)"  disabled> &nbsp; {{temp.value}} &nbsp; </button>
+                  <button *ngIf='temp.value == "Pending"'  class="pendingTag" (click)="changeTag(i, detailRes)"  disabled> &nbsp; {{temp.value}} &nbsp; </button>
+                  <button *ngIf='temp.value == "Verified"' class="verifiedTag"(click)="changeTag(i, detailRes)"  disabled> &nbsp; {{temp.value}} &nbsp; </button>
+                  <button *ngIf='temp.value == "Archived"' class="archivedTag"(click)="changeTag(i, detailRes)"  disabled> &nbsp;{{temp.value}}&nbsp; </button>
+
+                </span>
+
+              <span *ngIf='temp.type == "camera" ' > <img *ngIf='temp.value'  class="" src={{temp.value}} (click)='imageModal(temp.value,temp.location,temp.fileName)' style="max-width:230px" /> <span style="display: none" >{{temp.value}}</span> </span>  <!-- I M A G E   V A L U E  -->
+
+              <span *ngIf='temp.type == "video" ' > <video *ngIf='temp.value' class="" style="width:200px !important" controls> <source src={{temp.value}}> </video> <span style="display: none" >{{temp.value}}</span> </span>  <!-- V I D E O   V A L U E  -->
+
+              <span *ngIf='temp.type == "file" ' >
+                <button  *ngIf='temp.value' type="button" class="btn btn-primary" (click)='openImageNewTab(temp.value)'>  <i class="fa fa-download" aria-hidden="true"></i>  </button>   <!-- F I L E   V A L U E  -->
+                <span style="display: none" >{{temp.value}}</span>
+              </span>  <!-- F I L E   V A L U E  -->
+            </div>
+            <div class="col-1" >
+              <div *ngIf='i>4' >
+                <i *ngIf="temp.flagged" class="fa fa-flag" aria-hidden="true" (click)="flagCommentModal( i, detailRes[2].value, temp.cid)"></i>
+                <i *ngIf="!temp.flagged" class="fa fa-flag-o" aria-hidden="true" (click)="flagCommentModal( i, detailRes[2].value, temp.cid)" ></i>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <button *ngIf="verifyAll" type="button" class="btn btn-primary col-sm-3 pt-3 pb-3 verifiedTag" data-toggle="modal" (click)="verifyTag()" >Accept</button>
+        <button *ngIf="saveFlag" type="button" class="btn btn-primary col-sm-3 pt-3 pb-3" data-toggle="modal" (click)="saveFlagFun()" >Save Flag</button>
+        <button type="button" class="btn btn-secondary col-sm-3 pt-3 pb-3" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Details modal ends here-->
+
+<!-- Flag comment modal starts here-->
+<div class="modal fade" id="flagComment" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content" style="margin-top:200px; margin-left:100px">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Flag Comments </h5>
+        <h5> ( Optional ) </h5>
+      </div>
+      <div class="modal-body text-center" style="   overflow-y: auto">
+        <input type="text" class="form-control" [(ngModel)]='flaggedMsg' (change)='flagMsg()'>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary col-sm-3 pt-3 pb-3" data-dismiss="modal" (click)='flagMsg()'>Close</button>
+        <!-- <button type="button" class="btn btn-primary col-sm-3 pt-3 pb-3" data-toggle="modal" (click)="saveFlagFun()">Save Flag</button>
+        <button type="button" class="btn btn-secondary col-sm-3 pt-3 pb-3" data-dismiss="modal" (click)="cancelFlag()">Close</button> -->
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Response comment modal endss here-->
+
+<!-- Change Tag modal starts here-->
+<div class="modal fade" id="changeTag" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content" style="margin-top:200px; margin-left:100px">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Change Flag </h5>
+      </div>
+      <div class="modal-body text-center" style="overflow-y: auto">
+        <div class="row justify-content-md-center" >
+
+          <div class="col-12" > <button class="noTag" style="padding:5px; margin : 8px" (click)="newTag('')" > &nbsp;&nbsp; No-Tag &nbsp;&nbsp; </button> </div>
+
+          <div class="col-12" > <button class="verifiedTag" style="padding:5px; margin : 8px " (click)="newTag('Verified')"> &nbsp; Verified &nbsp; </button> </div>
+
+          <div class="col-12" > <button class="archivedTag" style="padding:5px;  margin : 8px" (click)="newTag('Archived')"> &nbsp;Archived&nbsp; </button> </div>
+
+        </div>
+      </div>
+      <div class="modal-footer">
+        <!-- <button type="button" class="btn btn-primary col-sm-3 pt-3 pb-3" data-toggle="modal" (click)="unFlagFun()">Update</button> -->
+        <button type="button" class="btn btn-secondary col-sm-3 pt-3 pb-3" data-dismiss="modal" >Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Change Tag comment modal endss here-->
+
+<!-- Image modal -->
+<div class="modal fade" id="imageModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content" style="width:750px; height:700px;">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Image View</h5>
+      </div>
+      <div class="modal-body text-center" style="overflow-y: auto">
+        <div class="row justify-content-md-center" >
+
+          <div class="col-7" >
+              <img class="north" src={{imgUrl}} style="max-width:100%"/>
+          </div>
+          <div class="col-5" >
+            <div class="row" >
+              <div class="col-12" style="height:200px">
+                {{imgFilename}} <br>
+                Latitude: {{imgLocation.lat}} <br>
+                Longitude: {{imgLocation.lng}} <br>
+                Accuracy: {{imgLocation.acc}}
+                <hr>
+                <button type="button" class="btn btn-primary"  (click)="openImageNewTab(imgUrl)">Open in new tab </button>
+              </div>
+              <div class="col-12" style="height:100%; width:100%">
+
+                 <!-- GOOGLE MAP -->
+
+                 <img [src]= getGoogleMapBig(imgLocation.lat,imgLocation.lng) height="100%" width="100%" alt="">
+
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary col-sm-3 pt-3 pb-3" data-dismiss="modal" >Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Image modal -->
+
+<!-- location modal -->
+<div class="modal fade" id="locationModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content" style="width:750px; height:700px;">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Image View</h5>
+      </div>
+      <div class="modal-body text-center" style="overflow-y: auto">
+        <div class="row justify-content-md-center" >
+
+          <div class="col-7" >
+              <img class="north" [src]= getGoogleMapBig2(iLocation.lat,iLocation.lng) style="max-width:100%"/>
+          </div>
+          <div class="col-5" >
+            <div class="row" >
+              <div class="col-12" style="height:200px">
+                Loacation: {{iLocation.lat}}, {{iLocation.lng}} <br>
+                Accuracy: {{iLocation.acc}} meters
+                <hr>
+                <button type="button" class="btn btn-primary"  (click)="openImageNewTab(getGoogleMapBig3(iLocation.lat,iLocation.lng))">Open in new tab </button>
+              </div>
+              <div class="col-12" style="height:100%; width:100%">
+
+                 <!-- GOOGLE MAP -->
+
+                 <!-- <img [src]= getGoogleMapBig(imgLocation.lat,imgLocation.lng) height="100%" width="100%" alt=""> -->
+
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary col-sm-3 pt-3 pb-3" data-dismiss="modal" >Close</button>
+      </div>
+    </div>
+  </div>
+</div>

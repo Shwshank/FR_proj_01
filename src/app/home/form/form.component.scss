@@ -1,0 +1,38 @@
+@import "~styles.scss";
+
+ss-multiselect-dropdown div ul li .dropdown-item.active, .dropdown-item:active {
+    color: #fff;
+    text-decoration: none;
+    background-color: #acd8ff !important;
+}
+
+.cbx11{
+  position: relative;
+}
+.cbx11BackGround{
+  position: absolute;
+   top: 0;
+   left: 0;
+   bottom: 0;
+   right: 0;
+   z-index: -1;
+   overflow: hidden;
+}
+.responseCount{
+  background-color: $light-highlight2;
+  color: $text-color-darkset2;
+  font-size:1.6rem;
+  border: 2px solid $light-highlight2;
+  border-radius: 3px;
+  margin-left: 14px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+.statusTag{
+  position: absolute;
+  top: 5px;
+  right: 0px;
+  background-color: #4caf50;
+  color: $text-color-darkset2;
+
+}

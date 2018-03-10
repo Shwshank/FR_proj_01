@@ -1,0 +1,12 @@
+<div class="form-group row  text-center">
+  <label for="staticEmail" class="col-sm-3 col-form-label text-left pt-3">  &nbsp; {{funID(id)}}. {{name}} </label>
+  <div class="col-5">
+    <input class="form-control mt-1 mb-1" [(ngModel)]='text' [disabled]=disabled placeholder="Latitude, longitude and accuracy" >
+
+  </div>
+  <div class="col-4 text-left" >
+    <i class="fa fa-arrow-up text-primary p-3" aria-hidden="true" (click)='upElement(id)'></i>
+    <i class="fa fa-arrow-down text-primary p-3" aria-hidden="true" (click)='downElement(id)'></i>
+    <i class="fa fa-trash-o text-danger p-3" aria-hidden="true" (click)='deleteElement(id)' ></i>
+  </div>
+</div>

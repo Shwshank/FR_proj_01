@@ -1,0 +1,129 @@
+<div class="container form-container text-center col-sm-8 mt-4 cbx" style="background:#fff;">
+  <br/>
+  <!-- <h3>QCI Form Builder &reg;</h3> -->
+  <div class="row justify-content-center">
+    <div class="col-md-12"  >
+      <h5>{{name}}</h5>
+      <p>{{project_name}}</p>
+      <button type="button" class="btn btn-primary col-sm-4 col-md-3 pt-3 pb-3" data-toggle="modal" data-target="#exampleModal">Add question</button>
+      <br/><br/>
+      <div *ngIf='!displayPublish' style="font-size:4rem;margin-top:30px;color:#b1b1b1" >
+        <p>Form elements will be displayed here!</p>
+      </div>
+      <div *ngFor='let json of jsonArray; let i = index' style=" max-height:750px; overflow-y:auto; overflow-x:hidden;">
+        <div *ngIf="json.type == 'location'" >
+          <!-- <input type="checkbox" name="checkbox" checked disabled> &nbsp; Form submition location will be shared by default &nbsp; <i class="fa fa-trash-o" aria-hidden="true" (click)='deleteElement(i)' ></i> -->
+          <app-input-location name={{json.name}} id={{i}} value={{json.value}} disabled={{disabledAll}} >  </app-input-location>
+        </div>
+        <div *ngIf="json.type == 'text'" >
+          <app-input-text name={{json.name}} id={{i}} value={{json.value}} disabled={{disabledAll}} >  </app-input-text>
+        </div>
+        <div *ngIf="json.type == 'password'" >
+          <app-input-password name={{json.name}} id={{i}} value={{json.value}} disabled={{disabledAll}} >  </app-input-password>
+        </div>
+        <div *ngIf="json.type == 'email'" >
+          <app-input-email name={{json.name}} id={{i}} value={{json.value}} disabled={{disabledAll}} >  </app-input-email>
+        </div>
+        <div *ngIf="json.type == 'number'" >
+          <app-input-number name={{json.name}} id={{i}} value={{json.value}} disabled={{disabledAll}} rangeFrom={{json.rangeFrom}} rangeTo={{json.rangeTo}} >  </app-input-number>
+        </div>
+        <div *ngIf="json.type == 'phone'" >
+          <app-input-phone name={{json.name}} id={{i}} value={{json.value}} disabled={{disabledAll}} >  </app-input-phone>
+        </div>
+        <div *ngIf="json.type == 'textarea'" >
+          <app-input-textarea name={{json.name}} id={{i}} value={{json.value}} disabled={{disabledAll}} >  </app-input-textarea>
+        </div>
+        <div *ngIf="json.type == 'date'" >
+          <app-input-date name={{json.name}} id={{i}} value={{json.value}} disabled={{disabledAll}} rangeFrom={{json.rangeFrom}} rangeTo={{json.rangeTo}} >  </app-input-date>
+        </div>
+        <div *ngIf="json.type == 'time'" >
+          <app-input-time name={{json.name}} id={{i}} value={{json.value}} disabled={{disabledAll}} rangeFrom={{json.rangeFrom}} rangeTo={{json.rangeTo}} >  </app-input-time>
+        </div>
+        <div *ngIf="json.type == 'radio'" >
+          <app-input-radio name={{json.name}} id={{i}} value={{json.value}} disabled={{disabledAll}} [option]=json.option >  </app-input-radio>
+        </div>
+        <div *ngIf="json.type == 'checkbox'" >
+          <app-input-checkbox name={{json.name}} id={{i}} value={{json.value}} disabled={{disabledAll}} [option]=json.option [values]=json.values>  </app-input-checkbox>
+        </div>
+        <div *ngIf="json.type == 'dropdown'" >
+          <app-input-dropdown name={{json.name}} id={{i}} value={{json.value}} disabled={{disabledAll}} [option]=json.option >  </app-input-dropdown>
+        </div>
+        <div *ngIf="json.type == 'slider'" >
+          <app-input-slider name={{json.name}} id={{i}} value={{json.value}} disabled={{disabledAll}} rangeFrom={{json.rangeFrom}} rangeTo={{json.rangeTo}} >  </app-input-slider>
+        </div>
+        <div *ngIf="json.type == 'file'" >
+          <app-input-file name={{json.name}} id={{i}} value={{json.value}} disabled={{disabledAll}} [fileTypes]=json.fileTypes >  </app-input-file>
+        </div>
+        <div *ngIf="json.type == 'camera'" >
+          <app-input-camera name={{json.name}} id={{i}} value={{json.value}} disabled={{disabledAll}} [fileTypes]=json.fileTypes >  </app-input-camera>
+        </div>
+        <div *ngIf="json.type == 'video'" >
+          <app-input-video name={{json.name}} id={{i}} value={{json.value}} disabled={{disabledAll}} [fileTypes]=json.fileTypes >  </app-input-video>
+        </div>
+        <div *ngIf="json.type == 'break'" >
+          <app-input-break name={{json.name}} id={{i}}>  </app-input-break>
+        </div>
+      </div>
+      <br/>
+      <div *ngIf='displayPublish' >
+          <button *ngIf='displayPublishForm' type="button" class="btn btn-success" (click)='publishForm()'> {{sumbitForm}} </button>
+      </div>
+      <br/>
+      <div *ngIf='displayPublish' >
+          <button *ngIf='displayPublishTemp' type="button" class="btn btn-success" (click)='publishTemplate()'> {{sumbitTemp}} </button>
+      </div>
+      <br/>
+    </div>
+  </div>
+</div>
+<!-- form element modal starts here -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content adf" style="width:700px !important">
+      <app-form-modal></app-form-modal>
+    </div>
+  </div>
+</div>
+<!-- form element modal ends here -->
+<!-- New form modal starts here -->
+<div class="modal fade" id="newFormModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">New Paper</h5>
+      </div>
+      <div class="modal-body" style="height:200px;  ">Paper Name:
+        <input type="text" name="" id="" [(ngModel)]=newFormName>
+        <br/>
+        Subject:
+        <select [(ngModel)]="projectAssociate" class="col-4 form-control">
+          <option *ngFor='let opt of projectArray; let i=i' [ngValue]=opt  >{{opt.name}}</option>
+        </select>
+        <!-- <input type="text" name="" id="" [(ngModel)]=newFormProjectName> -->
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" (click)='conformForm()'  data-dismiss="modal" >Publish new Paper</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="newTempModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">New Template</h5>
+      </div>
+      <div class="modal-body" style="height:200px;  ">
+        Template Name:
+        <input type="text" name="" id="" [(ngModel)]=newTempName>
+        <br />
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary col-sm-3 pt-3 pb-3" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary col-sm-5 pt-3 pb-3" (click)='conformTemp()'  data-dismiss="modal" >Save new Template</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- New template modal ends here -->

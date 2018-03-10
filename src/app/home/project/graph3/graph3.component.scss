@@ -1,0 +1,44 @@
+@import "~styles.scss";
+
+.graphDisplay2{
+  margin: auto;
+  height: 35px;
+  margin-top: 7px;
+  width: 100%;
+  border: 2px solid $secondary-color ;
+  border-radius: 5px;
+  background:linear-gradient(to bottom, #7e95a8, $secondary-color);
+  color: $text-color-darkset2;
+  font-size: 1.6rem;
+}
+.graph-display1{
+  color: $secondary-color;
+  text-align: right;
+  font-size: 1.8rem;
+}
+
+.graph-display01{
+  background-color: $secondary-color;
+  color: $text-color-darkset2;
+  border: 1px solid $text-color-darkset2;
+  border-radius: 4px;
+  text-align: center;
+  // background:linear-gradient(to bottom, #7e95a8, $secondary-color);
+}
+
+.graph-display2{
+  color: $secondary-color;
+  text-align: left;
+}
+
+.Gdisplay-3{
+  margin-top: 3px;
+  -webkit-transition: .5s; /* Safari */
+  transition: .5s;
+  font-size: 1.4rem;
+}
+
+.Gdisplay-3:hover{
+  // font-size: 1.5rem;
+  transform: rotate3d(0, 1, 0, 40deg);
+}
